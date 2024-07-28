@@ -1,10 +1,10 @@
-from flask import Flask, jsonify, url_for, request, send_from_directory
+from flask import Flask, jsonify, url_for, request, render_template
 
 #package explanation
 # jsonify - sends json messages to routes
-# url_for - adding dynamic routing (out of scope)
+# url_for - adding dynamic routing
 # request - using form methods/transmitting data
-# send_from_directory - render HTML files
+# send_from_directory - render HTML files (wasn't easy, time sink)
 # render_template - use Templating Engine (Jinja2)
 
 from flask_cors import CORS #update after installing cors and setting up react boilerplate
@@ -14,18 +14,18 @@ CORS(app)
 
 @app.route('/') #We then use the route() decorator to tell Flask what URL should trigger our function.
 def home():
-    return send_from_directory(app.static_folder, 'index.html')
-    #return jsonify({'message':'Hello, World! This is the index page for our pending app'})
+    return render_template('index.html')
+    # return jsonify({'message':'Hello, World! This is the index page for our pending app'})
 
 @app.route('/about')
 def about():
-    return send_from_directory('static', 'about.html')
+    return render_template('about.html')
     #return jsonify({'message':'Here is a place where you can learn more about our hackathon team'})
 
 
 @app.route('/error') 
 def error():
-    return send_from_directory('static', 'error.html')
+    return render_template('error.html')
     #return jsonify({'error':'Uh oh, page not found.'})
 
 #Mock API:
